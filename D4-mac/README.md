@@ -1,5 +1,7 @@
 factory_test: Simple factory test
 
+patterns: Tiled QD shapes, patterns and tiles
+
 puppetSprite-test: Test for moveable puppetized sprites
 
 puppetSprite-test.bin: Test for moveable puppetized sprites
