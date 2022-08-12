@@ -15,3 +15,5 @@ autohilite-matte-d4: non-matte sprite on the left, matte sprite on the right. ne
 autohilite-moveable-d4: moveable sprite on the left, non-moveable sprite on the right. moveable should not autohilite, non-moveable should autohilite.
 
 nonpuppetloop.dir: A non-puppet, looping sound should *not* loop if the sound channel is empty when the sound ends.
+
+D4-BITD-Test: movie containing a 32bpp BITD sprite having 4 red blobs, must render correctly.

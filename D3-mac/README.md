@@ -21,3 +21,5 @@ autohilite-d3: non-autohilite sprite on the left, autohilite sprite on the right
 autohilite-matte-d3: non-matte sprite on the left, matte sprite on the right. non-matte should not autohilite, matte should autohilite.
 
 autohilite-moveable-d3: moveable sprite on the left, non-moveable sprite on the right. moveable should not autohilite, non-moveable should autohilite.
+
+D3.1-BITD-Test: movie having a 32bpp BITD sprite with 2 red blobs. It must render correctly.
