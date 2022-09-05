@@ -1,6 +1,6 @@
-Transitions A-P: Demonstration of transitions 
+Transitions A-P: Demonstration of transitions. https://youtu.be/xr030e0eQhw
 
-Transitions S-Z: Demonstration of transitions
+Transitions S-Z: Demonstration of transitions. https://youtu.be/QPkFa0WkTbI
 
 qd-sq1-color1: color for QD squares
 
@@ -23,3 +23,4 @@ autohilite-matte-d3: non-matte sprite on the left, matte sprite on the right. no
 autohilite-moveable-d3: moveable sprite on the left, non-moveable sprite on the right. moveable should not autohilite, non-moveable should autohilite.
 
 D3.1-BITD-Test: movie having a 32bpp BITD sprite with 2 red blobs. It must render correctly.
+
