@@ -8,6 +8,8 @@ puppetSprite-test.bin: Test for moveable puppetized sprites
 
 redraw-test: Trailed sprites rendering test
 
+text-colors: Test for editable text color rendering
+
 autohilite-d4: non-autohilite sprite on the left, autohilite sprite on the right.
 
 autohilite-matte-d4: non-matte sprite on the left, matte sprite on the right. neither should autohilite.
