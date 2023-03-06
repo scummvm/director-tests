@@ -24,3 +24,6 @@ INK8B-8.DIR - 8-bit, C foreground, W background
 INK8B-9.DIR - 8-bit, C foreground, C background
 
 
+Palette tests:
+PALSWITC.DIR - using "go to" to jump ahead and backwards needs to be aware of intermediate palettes
+
