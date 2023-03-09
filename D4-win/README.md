@@ -23,6 +23,7 @@ INK8B-7.DIR - 8-bit, C foreground, B background
 INK8B-8.DIR - 8-bit, C foreground, W background
 INK8B-9.DIR - 8-bit, C foreground, C background
 
+INK8COL.DIR - Images for comparing the palette remapping behavior of various blend modes.
 
 Palette tests:
 PALSWITC.DIR - using "go to" to jump ahead and backwards needs to be aware of intermediate palettes
