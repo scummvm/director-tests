@@ -24,3 +24,5 @@ autohilite-moveable-d3: moveable sprite on the left, non-moveable sprite on the 
 
 D3.1-BITD-Test: movie having a 32bpp BITD sprite with 2 red blobs. It must render correctly.
 
+castNum-puppets-setloc-d3: puppeted sprite on left, both setcast and setpos buttons should work, while on right is non-puppeted and buttons have no effect or resetting changes, a flicker of movement but back to original position.
+

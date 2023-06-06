@@ -19,3 +19,5 @@ autohilite-moveable-d4: moveable sprite on the left, non-moveable sprite on the 
 nonpuppetloop.dir: A non-puppet, looping sound should *not* loop if the sound channel is empty when the sound ends.
 
 D4-BITD-Test: movie containing a 32bpp BITD sprite having 4 red blobs, must render correctly.
+
+castNum-puppets-setloc-d4: puppeted sprite on left, both setcast and setpos buttons should work, while on right is non-puppeted and buttons have no effect or resetting changes, a flicker of movement but back to original position.
