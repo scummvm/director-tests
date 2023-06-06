@@ -20,4 +20,4 @@ nonpuppetloop.dir: A non-puppet, looping sound should *not* loop if the sound ch
 
 D4-BITD-Test: movie containing a 32bpp BITD sprite having 4 red blobs, must render correctly.
 
-castNum-puppets-setloc-d4: puppeted sprite on left, both setcast and setpos buttons should work, while on right is non-puppeted and buttons have no effect or resetting changes, a flicker of movement but back to original position.
+castNum-puppets-setloc-moveable-d4: play with buttons and see the stats for configuration.
