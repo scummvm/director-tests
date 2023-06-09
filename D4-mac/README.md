@@ -21,3 +21,5 @@ nonpuppetloop.dir: A non-puppet, looping sound should *not* loop if the sound ch
 D4-BITD-Test: movie containing a 32bpp BITD sprite having 4 red blobs, must render correctly.
 
 castNum-puppets-setloc-moveable-d4: play with buttons and see the stats for configuration.
+
+sprite-properties-without-puppet: used for testing all the sprite properties and their behaviour in a absence of puppet.
