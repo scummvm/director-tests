@@ -23,3 +23,5 @@ D4-BITD-Test: movie containing a 32bpp BITD sprite having 4 red blobs, must rend
 castNum-puppets-setloc-moveable-d4: play with buttons and see the stats for configuration.
 
 sprite-properties-without-puppet: used for testing all the sprite properties and their behaviour in a absence of puppet.
+
+foreColor_blackrect_test: used to verify the default foreGround colors of sprite.
