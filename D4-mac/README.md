@@ -18,6 +18,8 @@ autohilite-moveable-d4: moveable sprite on the left, non-moveable sprite on the 
 
 nonpuppetloop.dir: A non-puppet, looping sound should *not* loop if the sound channel is empty when the sound ends.
 
+nonpuppet_colorchange_test: score overrides background setting for non-puppet sprites. Push the button -> red bg, then autoswitches to transparent
+
 D4-BITD-Test: movie containing a 32bpp BITD sprite having 4 red blobs, must render correctly.
 
 castNum-puppets-setloc-moveable-d4: play with buttons and see the stats for configuration.
@@ -25,3 +27,4 @@ castNum-puppets-setloc-moveable-d4: play with buttons and see the stats for conf
 sprite-properties-without-puppet: used for testing all the sprite properties and their behaviour in a absence of puppet.
 
 foreColor_blackrect_test: used to verify the default foreGround colors of sprite.
+
