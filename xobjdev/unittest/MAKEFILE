@@ -1,0 +1,134 @@
+########################################################################
+# 
+# Makefile for the ScummVM UnitTest XObject for Director 4.0
+#
+########################################################################
+
+# Name of the system being built
+NAME	= unittest
+
+# Select the type of build (one of the two):
+#BUILD	= $(PROG)
+BUILD	= $(DLL)
+
+# Select whether debugging is to be enabled
+#DEBUG	= YES
+DEBUG	= NO
+
+#
+# Memory model to use for building the system
+MODEL	= L
+
+#
+# Derived filenames
+PROG	= $(NAME).exe
+DLL	= $(NAME).dll
+RES	= $(NAME).res
+DEF	= $(NAME).def
+
+#
+# Header files used by the sources 
+HDRS	=
+
+#
+# Source files
+SRCS	= $(ASMS) unittest.c
+
+#
+# Assembler Source files
+ASMS	= 
+
+#
+# All objects used in the system
+OBJS	= unittest.obj
+
+#
+# Local Include Directory
+INCDIR	= -I..\include
+
+#
+# Libraries required to be explicitly linked
+LIBS	= $(MODEL)dllcew libw
+
+#
+# Flags for Assembling, Compiling and Linking
+#
+!if "$(DEBUG)" == "NO"
+#
+# Non-debugging options
+#
+AFLAGS	=
+!if "$(BUILD)" == "$(PROG)"
+CFLAGS	= $(INCDIR) -DMSW -A$(MODEL) -G2w -Ox -W3 -Zp -D_WINDOWS
+!endif
+!if "$(BUILD)" == "$(DLL)"
+CFLAGS	= $(INCDIR) -DMSW -A$(MODEL)w -G2w -Ox -W3 -Zp -D_WINDOWS -D_WINDLL
+!endif
+LFLAGS	= /al:16/m/NOD /PACKC
+CVPACK	= REM
+!else
+#
+# Debugging options
+#
+AFLAGS	= -DDEBUG -Zi
+!if "$(BUILD)" == "$(PROG)"
+CFLAGS	= $(INCDIR) -DMSW -DDEBUG -A$(MODEL) -G2sw -Od -W3 -Zip -D_WINDOWS
+!endif
+!if "$(BUILD)" == "$(DLL)"
+CFLAGS	= $(INCDIR) -DMSW -DDEBUG -A$(MODEL)w -G2sw -Od -W3 -Zip -D_WINDOWS -D_WINDLL
+!endif
+LFLAGS	= /al:16/m/NOD/CO /PACKC
+CVPACK	= REM
+!endif
+
+#
+# Start of actual targets
+
+all:	$(BUILD)
+
+#
+# Make the program
+$(PROG)	$(DLL): $(OBJS) $(DEF) $(RES)
+        LINK $(LFLAGS) @<<
+                $(OBJS)
+                $@
+                $(NAME).map
+                $(LIBS)
+                $(DEF)
+<<
+	mapsym /n $(NAME).map
+	$(CVPACK) -p $@
+        rc $(RES) $@
+
+#
+# Build the DLL interface library
+$(NAME).lib:	$(DEF)
+	implib $(NAME).lib $(DEF)
+
+# Resource file
+$(RES):	$(NAME).rc
+	rc -r $(NAME).rc
+
+# Clean up directory
+clean:
+	del *.obj
+	del *.res
+	del *.sym
+	del *.map
+	del *.exe
+	del *.dll
+	del *.bak
+	del *.lib
+
+# Make dependency list
+depend:
+	makedep $(INCDIR) > makefile.new @<<
+                $(SRCS)
+<<
+	DEL makefile.BAK
+	REN makefile makefile.BAK
+	REN makefile.new makefile
+
+# DO NOT DELETE THIS LINE
+
+unittest.obj: ..\include/XObject.h 

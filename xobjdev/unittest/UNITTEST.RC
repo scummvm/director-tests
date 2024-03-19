@@ -1,0 +1,12 @@
+
+#include <windows.h>
+
+XMethTable RCDATA
+BEGIN
+    "-- ScummVM UnitTest XObject.\0",
+    "UnitTest\0",
+    "I      mNew                --Creates a new instance of the XObject\0",
+    "X      mDispose            --Disposes of XObject instance\0",
+    "IS     mScreenshot, path   --Copy contents of stage window to file\0",
+    "\0\0"
+END

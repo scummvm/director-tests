@@ -1,0 +1,15 @@
+LIBRARY         UnitTest
+DESCRIPTION     'ScummVM UnitTest XObject'
+EXETYPE         WINDOWS
+STUB            'WINSTUB.EXE'
+CODE            MOVEABLE DISCARDABLE LOADONCALL
+DATA            MOVEABLE SINGLE
+HEAPSIZE        128
+SEGMENTS
+        WIDGET_TEXT                     MOVEABLE DISCARDABLE LOADONCALL
+EXPORTS
+;        LibEntry                        @1      RESIDENTNAME
+        WEP                             @2      RESIDENTNAME
+        _UnitTest_mNew                    @3
+        _UnitTest_mDispose                @4
+        _UnitTest_mScreenshot             @5
