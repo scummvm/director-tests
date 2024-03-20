@@ -172,17 +172,19 @@ long __far __pascal __export _unittest_mScreenshot(
     int width = 0;
     int height = 0;
     BITMAPFILEHEADER bf;
-    BITMAPINFO bi = {0};
+    BITMAPINFOHEADER bmInfo;
     HWND hWnd;
     HDC hWindowDC;
     HDC hMemDC;
-    int iBits;
+    int iBits = 0;
     LPPALETTEENTRY lppColors[256];
     LPSTR pPath;
     HBITMAP hbWindow;
-    DWORD dwBmpSize = 0;
+    HGDIOBJ hgPrev;
+    DWORD sizeDIB;
     HANDLE hDIB;
-    LPVOID lpBitmap;
+    LPBITMAPINFOHEADER lpBitmap;
+    LPSTR lpBits;
     int response = 0;
 
     HFILE hFile;
@@ -192,7 +194,6 @@ long __far __pascal __export _unittest_mScreenshot(
     width = rect.right - rect.left;
     height = rect.bottom - rect.top;
 
-
     hWindowDC = GetDC(hWnd);
     hMemDC = CreateCompatibleDC(hWindowDC);
     SetStretchBltMode(hMemDC, COLORONCOLOR);
@@ -200,31 +201,44 @@ long __far __pascal __export _unittest_mScreenshot(
     GetSystemPaletteEntries(hWindowDC, 0, 256, &lppColors);
     LogMessage( xtbl, "Creating a bitmap - width: %d, height: %d, bpp: %d\n", width, height, iBits );
 
-    bi.bmiHeader.biSize = sizeof(BITMAPINFOHEADER);
-    bi.bmiHeader.biWidth = width;
-    bi.bmiHeader.biHeight = -height;  //this is the line that makes it draw upside down or not
-    bi.bmiHeader.biPlanes = 1;
-    bi.bmiHeader.biBitCount = iBits <= 8 ? 8 : 24;
-    bi.bmiHeader.biCompression = BI_RGB;
-    bi.bmiHeader.biSizeImage = 0;
-    bi.bmiHeader.biXPelsPerMeter = 0;
-    bi.bmiHeader.biYPelsPerMeter = 0;
-    bi.bmiHeader.biClrUsed = iBits <= 8 ? 256 : 0;
-    bi.bmiHeader.biClrImportant = 0;
-    
+    bmInfo.biSize = sizeof(BITMAPINFOHEADER);
+    bmInfo.biWidth = width;
+    bmInfo.biHeight = height; 
+    bmInfo.biPlanes = 1;
+    bmInfo.biBitCount = iBits <= 8 ? 8 : 24;
+    bmInfo.biCompression = BI_RGB;
+    bmInfo.biSizeImage = 0;
+    bmInfo.biXPelsPerMeter = 0;
+    bmInfo.biYPelsPerMeter = 0;
+    bmInfo.biClrUsed = iBits <= 8 ? 256 : 0;
+    bmInfo.biClrImportant = 0;
+    bmInfo.biSizeImage = ((((DWORD)width * (DWORD)bmInfo.biBitCount + 31) & ~31) >> 3) * (DWORD)height;
     hbWindow = CreateCompatibleBitmap(hWindowDC, width, height);
-    SelectObject(hMemDC, hbWindow);
+    LogMessage( xtbl, "CreateCompatibleBitmap: %d\n", hbWindow );
+    LogMessage( xtbl, "Bitmap image data size: %ld bytes\n", (DWORD)bmInfo.biSizeImage);
 
-    dwBmpSize = ((width * bi.bmiHeader.biBitCount + 31) / 32) * 4 * height;
-    hDIB = GlobalAlloc(GHND, dwBmpSize);
-    lpBitmap = (LPVOID)GlobalLock(hDIB);
-    LogMessage( xtbl, "Bitmap data size: %ld bytes\n", dwBmpSize );
+    hgPrev = SelectObject(hMemDC, hbWindow);
+    sizeDIB = (DWORD)sizeof(BITMAPINFOHEADER) + (DWORD)bmInfo.biSizeImage;
+    if (iBits == 8) {
+        sizeDIB += (DWORD)sizeof(lppColors);
+    }
+    LogMessage( xtbl, "Bitmap data size: %ld bytes\n", sizeDIB);
+    hDIB = GlobalAlloc(GHND, sizeDIB);
+    lpBitmap = (LPBITMAPINFOHEADER)GlobalLock(hDIB);
+    *lpBitmap = bmInfo;
+    lpBits = (LPSTR)lpBitmap + *(LPDWORD)lpBitmap;
+    if (iBits == 8) {
+        LogMessage( xtbl, "Writing %d bytes of palette data\n", sizeof(lppColors));
+        memcpy(lpBits, lppColors, sizeof(lppColors));
+        lpBits += sizeof(lppColors);
+    }
 
-    // copy from the window device context to the bitmap device context
-    //StretchBlt(hMemDC, 0, 0, width, height, hWindowDC, rect.left, rect.top, width, height, SRCCOPY);
+    // copy from the window device context to the memory device context
     response = BitBlt(hMemDC, 0, 0, width, height, hWindowDC, 0, 0, SRCCOPY);
     LogMessage( xtbl, "BitBlt response: %d\n", response );
-    response = GetDIBits(hWindowDC, hbWindow, 0, height, lpBitmap, &bi, DIB_RGB_COLORS);
+
+    SelectObject(hMemDC, hgPrev);
+    response = GetDIBits(hWindowDC, hbWindow, 0, height, lpBits, (LPBITMAPINFO) lpBitmap, DIB_RGB_COLORS);
     LogMessage( xtbl, "GetDIBits response: %ld %d\n", lpBitmap, response );
 
     // avoid memory leak
@@ -242,23 +256,21 @@ long __far __pascal __export _unittest_mScreenshot(
 
     
     // Offset to where the actual bitmap bits start.
-    bf.bfOffBits = (DWORD)sizeof(BITMAPFILEHEADER) + (DWORD)sizeof(BITMAPINFO);
+    bf.bfOffBits = (DWORD)sizeof(BITMAPFILEHEADER) + (DWORD)sizeof(BITMAPINFOHEADER);
     if (iBits <= 8) {
         bf.bfOffBits += 4*256;
     }
-    
-    // Add the size of the headers to the size of the bitmap to get the total file size.
-    bf.bfSize = dwBmpSize + bf.bfOffBits;
+   
+    // total file size, including headers
+    bf.bfSize = (DWORD)sizeof(BITMAPFILEHEADER) + (DWORD)sizeDIB;
 
     // bfType must always be BM for Bitmaps.
     bf.bfType = 0x4D42; // BM.
+    bf.bfReserved1 = 0;
+    bf.bfReserved2 = 0;
 
-    _lwrite(hFile, (LPSTR)&bf, sizeof(BITMAPFILEHEADER));
-    _lwrite(hFile, (LPSTR)&bi, sizeof(BITMAPINFO));
-    if (iBits <= 8) {
-        _lwrite(hFile, (LPSTR)lppColors, 4*256);
-    }
-    _lwrite(hFile, (LPSTR)lpBitmap, dwBmpSize);
+    _hwrite(hFile, (LPSTR)&bf, sizeof(BITMAPFILEHEADER));
+    _hwrite(hFile, (LPSTR)lpBitmap, sizeDIB);
 
     // Unlock and Free the DIB from the heap.
     GlobalUnlock(hDIB);
@@ -269,7 +281,4 @@ long __far __pascal __export _unittest_mScreenshot(
 
     return 0;
 }
-
-
-
 
