@@ -12,4 +12,8 @@ EXPORTS
         WEP                             @2      RESIDENTNAME
         _UnitTest_mNew                    @3
         _UnitTest_mDispose                @4
-        _UnitTest_mScreenshot             @5
+        _UnitTest_mIsRealDirector         @5
+        _UnitTest_mScreenshot             @6
+        _UnitTest_mMoveMouse              @7
+        _UnitTest_mLeftMouseDown          @8
+        _UnitTest_mLeftMouseUp            @9

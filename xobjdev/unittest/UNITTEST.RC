@@ -5,8 +5,12 @@ XMethTable RCDATA
 BEGIN
     "-- ScummVM UnitTest XObject.\0",
     "UnitTest\0",
-    "I      mNew                --Creates a new instance of the XObject\0",
-    "X      mDispose            --Disposes of XObject instance\0",
-    "IS     mScreenshot, path   --Copy contents of stage window to file\0",
+    "I      mNew                     --Creates a new instance of the XObject\0",
+    "X      mDispose                 --Disposes of XObject instance\0",
+    "I      mIsRealDirector          --Returns 1 for real Director, 0 for ScummVM\0",
+    "IS     mScreenshot, path        --Copy contents of stage window to file\0",
+    "III    mMoveMouse, x, y         --Move the mouse pointer to window position (x, y)\0",
+    "I      mLeftMouseDown           --Press the LMB\0",
+    "I      mLeftMouseUp             --Release the LMB\0",
     "\0\0"
 END
