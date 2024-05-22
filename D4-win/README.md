@@ -25,6 +25,7 @@ INK8B-9.DIR - 8-bit, C foreground, C background
 
 INK8COL.DIR - Images for comparing the palette remapping behavior of various blend modes.
 
+SOFT1.DXR - test file with inaccurate font color rendering
+
 Palette tests:
 PALSWITC.DIR - using "go to" to jump ahead and backwards needs to be aware of intermediate palettes
-
