@@ -25,3 +25,7 @@ autohilite-moveable-d3: moveable sprite on the left, non-moveable sprite on the 
 D3.1-BITD-Test: movie having a 32bpp BITD sprite with 2 red blobs. It must render correctly.
 
 castNum-puppets-setloc-moveable-d3: play with buttons and see the stats for configuration.
+
+1bpp-inktest-1: various ink types in 1bpp
+
+1bpp-inktest-2: various ink types in 1bpp
