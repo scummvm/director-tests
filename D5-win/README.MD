@@ -8,3 +8,5 @@ The objective of these tests is to provide regression coverage for the undocumen
 `switch_movie_test_movie1.dir`: Load a recognizable (blue colored solid circle) bitmap image and a button `Switch Movie` upon pressing which the movie switches to a different movie `switch_movie_test_movie2.dir`, not meant to be played separately.
 
 `switch_movie_test_movie2.dir`: Load a recognizable (orange colored solid circle) bitmap image and a button `Switch Movie` upon pressing which the movie switches to a different movie `switch_movie_test_movie1.dir`, not meant to be played separately.
+
+`palette_duplication_test_d5.dir`: Load an empty canvas with two buttons, `Duplicate Cast` (for duplicating the palette cast member present) and `Save Movie` (which attempts to save the movie). No visual effect to be noticed except Cast has an extra castmember.
