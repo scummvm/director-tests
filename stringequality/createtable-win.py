@@ -5,7 +5,11 @@ from pathlib import Path
 
 def hexify_table(filename: Path) -> None:
     with open(filename, "r") as f:
-        print([hex(i) for i in json.load(f)])
+        print("{") 
+        data = json.load(f)
+        for i in range(0, len(data), 16):
+            print(f"\t{', '.join(map(hex, data[i:i+16]))}")
+        print("};")
 
 
 if __name__ == "__main__":
