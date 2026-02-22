@@ -10,6 +10,8 @@ redraw-test: Trailed sprites rendering test
 
 text-colors: Test for editable text color rendering
 
+TextBlend: Test for using different inks on 8-bit colored text.
+
 autohilite-d4: non-autohilite sprite on the left, autohilite sprite on the right.
 
 autohilite-matte-d4: non-matte sprite on the left, matte sprite on the right. neither should autohilite.
