@@ -6,7 +6,7 @@ while (<>) {
   chomp;
 
   if (/"(\d+), (\d+)\"/) {
-     print "\r" if ($1 % 16 == 0);
+     print "\n" if ($1 % 16 == 0);
 
      $a[$2] = $1;
 
@@ -15,7 +15,7 @@ while (<>) {
 }
 
 for my $c (0..$#a) {
-  print "\r" if ($c % 32 == 0);
+  print "\n" if ($c % 32 == 0);
 
   if ($a[$c] >= 32 && $a[$c] < 255 && $a[$c] != 127) {
     print chr($a[$c]);
@@ -24,4 +24,4 @@ for my $c (0..$#a) {
   }
 }
 
-print "\r";
+print "\n";
