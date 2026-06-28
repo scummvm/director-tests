@@ -29,3 +29,8 @@ SOFT1.DXR - test file with inaccurate font color rendering
 
 Palette tests:
 PALSWITC.DIR - using "go to" to jump ahead and backwards needs to be aware of intermediate palettes
+
+Text wrapping tests:
+TEXTWRAP.DIR - text cast member word wrapping test.
+Verifies that text labels wrap correctly based on the cast member's initialRect width. 
+Created to catch regressions where labels such as "Hamburger" were incorrectly wrapping as "Hamburge\nr" in D4 games.
