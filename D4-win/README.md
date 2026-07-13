@@ -34,3 +34,6 @@ Text wrapping tests:
 TEXTWRAP.DIR - text cast member word wrapping test.
 Verifies that text labels wrap correctly based on the cast member's initialRect width. 
 Created to catch regressions where labels such as "Hamburger" were incorrectly wrapping as "Hamburge\nr" in D4 games.
+
+tell/
+tell.dir - test of cross-movie object creation, when objects live in the original movie context and called from another movie
