@@ -12,6 +12,21 @@ In the Message window the tables are printed with `put table` and copy-pasted in
 For the mac versions the output is different and also copy-pasted into a text file.
 For D3 mac and D4 mac the tables are the same.
 
+For Director 8, the handlers in EQD5W.DIR do not survive the movie
+conversion, so the table was generated from the Message window instead:
+declare `global table`, then load `gentable-win-messagewindow.ls` with
+FileIO and run it with `do`. It writes the table straight to a text file:
+
+    global table
+    fileObj = new(xtra "fileio")
+    openFile(fileObj, "C:\gentable-win-messagewindow.ls", 1)
+    s = readFile(fileObj)
+    closeFile(fileObj)
+    do s
+
+D8-win-equalitytable.txt was generated this way in Director 8.0 (English)
+and is byte-identical to the D6 and D7 tables.
+
 ## ScummVM side of things
 
 The tables can be read and outputted with the corresponding python files.
