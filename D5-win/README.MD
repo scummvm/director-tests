@@ -16,3 +16,7 @@ The objective of these tests is to provide regression coverage for the undocumen
 `10PLAN_M.dir`: Holds the plan data for Captain's Chembers in trektech-win, meant only as support for `movie_castmember_test_d5.dir`, not meant to be loaded separately.
 
 `4PLAN_M.dir`: Holds the plan data for one of the floors in trektech-win, meant only as support for `movie_castmember_test_d5.dir`, not meant to be loaded separately.
+
+`clickon.dir`: test for the clickOn behavior when sprite is turned off in an intermediate step
+
+
