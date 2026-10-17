@@ -41,3 +41,5 @@ tell/
 tell.dir - test of cross-movie object creation, when objects live in the original movie context and called from another movie
 
 editable-d4.dir. When consecutive frames that differ in nothing but the editable flag of a sprite need to be updated, not persisted.
+
+listoverride-d4.dir: list-builtin override before the me-object method lookup so the builtin wins.
