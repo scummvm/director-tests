@@ -39,3 +39,5 @@ clickon.dir: test for `the clickOn` behavior when sprite is turned off in an int
 
 tell/
 tell.dir - test of cross-movie object creation, when objects live in the original movie context and called from another movie
+
+editable-d4.dir. When consecutive frames that differ in nothing but the editable flag of a sprite need to be updated, not persisted.
